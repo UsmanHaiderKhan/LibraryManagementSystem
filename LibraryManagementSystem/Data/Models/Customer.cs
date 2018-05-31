@@ -8,7 +8,6 @@ namespace LibraryManagementSystem.Data.Models
 {
     public class Customer
     {
-
         public int CustomerId { get; set; }
         [Required]
         [MinLength(3)]
