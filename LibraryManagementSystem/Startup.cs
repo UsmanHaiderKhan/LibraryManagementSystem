@@ -19,11 +19,10 @@ namespace LibraryManagementSystem
         {
             _configurationRoot = new ConfigurationBuilder()
                 .SetBasePath(ihostingEnvironment.ContentRootPath)
-                .AddJsonFile("appsettings.json").Build();
+                .AddJsonFile("appsettingsCon.json").Build();
         }
 
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<LibraryContext>(options =>
@@ -42,6 +41,7 @@ namespace LibraryManagementSystem
                     name: "default",
                     template: "{controller=Customer}/{action=Index}/{id?}");
             });
+            DbInitializer.Seed(app);
         }
     }
 }
