@@ -34,6 +34,7 @@ namespace LibraryManagementSystem
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            app.UseStatusCodePages();
             app.UseStaticFiles();
             app.UseMvc(routes =>
             {
@@ -41,7 +42,7 @@ namespace LibraryManagementSystem
                     name: "default",
                     template: "{controller=Customer}/{action=Index}/{id?}");
             });
-            DbInitializer.Seed(app);
+            //DbInitializer.Seed(app);
         }
     }
 }
