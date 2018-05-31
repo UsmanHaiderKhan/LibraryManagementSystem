@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using LibraryManagementSystem.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -27,6 +28,7 @@ namespace LibraryManagementSystem
         {
             services.AddDbContext<LibraryContext>(options =>
                 options.UseSqlServer(_configurationRoot.GetConnectionString("DefaultConnection")));
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddMvc();
         }
 
