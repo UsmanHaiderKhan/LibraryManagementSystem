@@ -9,13 +9,13 @@ namespace LibraryManagementSystem.Data.Handlers
 {
     public class BookHandler
     {
-        public Book GetBookById(Customer customer)
+        public List<Book> GetBookwithAuthorandBorrowerById(int id)
         {
             var builder = new DbContextOptionsBuilder<LibraryContext>();
             var db = new LibraryContext(builder.Options);
             using (db)
             {
-                return (from c in db.Books where c.BorrowerId == customer.CustomerId select c).FirstOrDefault();
+                return (from c in db.Books.Include(m => m.Author).Include(m => m.Borrower) where c.BorrowerId == id select c).ToList();
             }
         }
 
@@ -26,6 +26,26 @@ namespace LibraryManagementSystem.Data.Handlers
             using (db)
             {
                 return (from c in db.Books where c.BorrowerId == customer.CustomerId select c).Count();
+            }
+        }
+
+        public List<Book> GetBookswithAuthor()
+        {
+            var builder = new DbContextOptionsBuilder<LibraryContext>();
+            var db = new LibraryContext(builder.Options);
+            using (db)
+            {
+                return (from c in db.Books.Include(m => m.Author) select c).ToList();
+            }
+        }
+
+        public Book GetBookById(int id)
+        {
+            var builder = new DbContextOptionsBuilder<LibraryContext>();
+            var db = new LibraryContext(builder.Options);
+            using (db)
+            {
+                return (from c in db.Books where c.BookId == id select c).FirstOrDefault();
             }
         }
     }

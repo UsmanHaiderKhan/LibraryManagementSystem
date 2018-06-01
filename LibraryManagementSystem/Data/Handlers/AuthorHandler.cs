@@ -29,5 +29,25 @@ namespace LibraryManagementSystem.Data.Handlers
             }
         }
 
+        public Author GetAuthorwithBooksById(int id)
+        {
+            var builder = new DbContextOptionsBuilder<LibraryContext>();
+            var db = new LibraryContext(builder.Options);
+            using (db)
+            {
+                return (from c in db.Authors.Include(m => m.Books) where c.AuthorId == id select c).FirstOrDefault();
+            }
+        }
+
+        public List<Author> GetAllAuthors()
+        {
+            var builder = new DbContextOptionsBuilder<LibraryContext>();
+            var db = new LibraryContext(builder.Options);
+            using (db)
+            {
+                return (from c in db.Authors select c).ToList();
+            }
+        }
+
     }
 }
