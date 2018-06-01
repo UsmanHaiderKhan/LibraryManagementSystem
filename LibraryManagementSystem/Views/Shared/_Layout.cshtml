@@ -6,16 +6,17 @@
     <title>@ViewData["Title"] - LibraryManagementSystem</title>
 
     <environment include="Development">
+        <link href="~/MDB Free/fontawesome-free-5.0.13/web-fonts-with-css/css/fontawesome-all.css" rel="stylesheet" />
         <link href="~/MDB Free/css/bootstrap.css" rel="stylesheet" />
         <link href="~/MDB Free/css/mdb.css" rel="stylesheet" />
         <link href="~/MDB Free/css/style.css" rel="stylesheet" />
     </environment>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark primary-color">
+    <nav class="navbar navbar-expand-lg navbar-dark deep-purple">
 
         <!-- Navbar brand -->
-        <a class="navbar-brand" href="#">Navbar</a>
+        <a class="navbar-brand" href="#"><span class="fa fa-book-open fa-lg"></span>&nbsp; Smart Library System</a>
 
         <!-- Collapse button -->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav" aria-controls="basicExampleNav"
@@ -30,12 +31,12 @@
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
                     <a class="nav-link" href="#">
-                        Home
+                        <span class="fa fa-home fa-lg"></span>&nbsp;  Home
                         <span class="sr-only">(current)</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Features</a>
+                    <a class="nav-link" asp-controller="Customer" asp-action="Index"><span class="fa fa-user"></span>&nbsp;Customer</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Pricing</a>
