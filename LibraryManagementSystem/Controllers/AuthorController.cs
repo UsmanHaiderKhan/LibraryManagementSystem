@@ -47,7 +47,7 @@ namespace LibraryManagementSystem.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult AddAuthore(Author author)
+        public IActionResult AddAuthor(Author author)
         {
             var builder = new DbContextOptionsBuilder<LibraryContext>();
             var db = new LibraryContext(builder.Options);
