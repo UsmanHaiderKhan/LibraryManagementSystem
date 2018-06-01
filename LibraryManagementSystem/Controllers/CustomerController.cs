@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
+using LibraryManagementSystem.Data;
 using LibraryManagementSystem.Data.Handlers;
 using LibraryManagementSystem.Data.Models;
 using LibraryManagementSystem.ViewModel;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace LibraryManagementSystem.Controllers
 {
@@ -28,6 +30,20 @@ namespace LibraryManagementSystem.Controllers
 
             }
             return View(customerViewModel);
+        }
+
+        public IActionResult Delete(int id)
+        {
+            var builder = new DbContextOptionsBuilder<LibraryContext>();
+            var db = new LibraryContext(builder.Options);
+            Customer customer = new CustomerHandler().GetCustomerById(id);
+            if (customer != null)
+            {
+                db.Entry(customer).State = EntityState.Deleted;
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("Index");
         }
     }
 }
