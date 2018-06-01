@@ -1,0 +1,34 @@
+﻿
+@model IEnumerable<Book>
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+
+
+<a class="btn btn-success mt-5" style="margin: 10px" asp-controller="Book" asp-action="AddBooks">Create new book</a>
+
+<table class="table table-striped table-hover ">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Authors name</th>
+            <th>Edit book</th>
+            <th>Delete book</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Book book in Model)
+        {
+            <tr>
+                <td>@book.BookId</td>
+                <td>@book.Title</td>
+                <td>@book.Author.Name</td>
+                <td><a class="btn btn-info" asp-area="" asp-controller="Book" asp-action="UpdateBooks" asp-route-id="@book.BookId">Edit</a></td>
+                <td><a class="btn btn-danger" asp-area="" asp-controller="Book" asp-action="DeleteBook" asp-route-id="@book.BookId" asp-route-authorId="@ViewBag.AuthorId">Delete</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
