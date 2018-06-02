@@ -1,5 +1,6 @@
 ﻿using LibraryManagementSystem.Data;
 using LibraryManagementSystem.Data.Handlers;
+using LibraryManagementSystem.Data.Models;
 using LibraryManagementSystem.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -9,9 +10,9 @@ namespace LibraryManagementSystem.Controllers
     public class LendController : Controller
     {
         // GET
-        public IActionResult Index(int num)
+        public IActionResult Index()
         {
-            var availableBooks = new BookHandler().GetBookwithAuthorBorrower(num);
+            var availableBooks = new BookHandler().GetBookwithAuthorBorrower();
             if (availableBooks.Count == 0)
             {
                 return View("Empty");

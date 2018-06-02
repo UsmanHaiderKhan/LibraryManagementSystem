@@ -49,13 +49,13 @@ namespace LibraryManagementSystem.Data.Handlers
             }
         }
 
-        public List<Book> GetBookwithAuthorBorrower(int num)
+        public List<Book> GetBookwithAuthorBorrower()
         {
             var builder = new DbContextOptionsBuilder<LibraryContext>();
             var db = new LibraryContext(builder.Options);
             using (db)
             {
-                return (from c in db.Books.Include(m => m.Borrower) where c.BorrowerId == 0 select c)
+                return (from c in db.Books.Include(m => m.Author) select c)
                     .ToList();
             }
         }
