@@ -12,7 +12,7 @@ namespace LibraryManagementSystem.Controllers
         // GET
         public IActionResult Index()
         {
-            var availableBooks = new BookHandler().GetBookwithAuthorBorrower();
+            var availableBooks = new BookHandler().GetBookwithAuthorBorrower(c => c.BorrowerId == 0);
             if (availableBooks.Count == 0)
             {
                 return View("Empty");
