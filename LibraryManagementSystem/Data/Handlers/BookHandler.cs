@@ -49,13 +49,16 @@ namespace LibraryManagementSystem.Data.Handlers
             }
         }
 
-        public List<Book> GetBookwithAuthorBorrower()
+        public List<Book> GetBookwithAuthorBorrower(Func<Book, bool> predicat)
         {
             var builder = new DbContextOptionsBuilder<LibraryContext>();
             var db = new LibraryContext(builder.Options);
             using (db)
             {
-                return (from c in db.Books.Include(m => m.Author) select c)
+                return (from c in db.Books
+                        .Include(m => m.Author)
+                        .Include(m => m.Borrower).Where(predicat)
+                        select c)
                     .ToList();
             }
         }
