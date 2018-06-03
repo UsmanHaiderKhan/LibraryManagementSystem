@@ -14,9 +14,8 @@ namespace LibraryManagementSystem.Data.Models
         [MaxLength(50)]
         public string Title { get; set; }
         public virtual Author Author { get; set; }
-        public int AuthorId { get; set; }
-        public Customer Borrower { get; set; }
-        public int BorrowerId { get; set; }
+        public Customer Customer { get; set; }
+
 
 
     }

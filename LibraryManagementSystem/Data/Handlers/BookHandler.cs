@@ -15,7 +15,7 @@ namespace LibraryManagementSystem.Data.Handlers
             var db = new LibraryContext(builder.Options);
             using (db)
             {
-                return (from c in db.Books.Include(m => m.Author).Include(m => m.Borrower) where c.BorrowerId == id select c).ToList();
+                return (from c in db.Books.Include(m => m.Author).Include(m => m.Customer) where c.Customer.CustomerId == id select c).ToList();
             }
         }
 
@@ -25,7 +25,7 @@ namespace LibraryManagementSystem.Data.Handlers
             var db = new LibraryContext(builder.Options);
             using (db)
             {
-                return (from c in db.Books where c.BorrowerId == customer.CustomerId select c).Count();
+                return (from c in db.Books where c.Customer.CustomerId == customer.CustomerId select c).Count();
             }
         }
 
@@ -45,11 +45,11 @@ namespace LibraryManagementSystem.Data.Handlers
             var db = new LibraryContext(builder.Options);
             using (db)
             {
-                return (from c in db.Books where c.BookId == id select c).FirstOrDefault();
+                return (from c in db.Books.Include(m => m.Customer).Include(m => m.Author) where c.BookId == id select c).FirstOrDefault();
             }
         }
 
-        public List<Book> GetBookwithAuthorBorrower(Func<Book, bool> predicat)
+        public List<Book> GetBookwithAuthorBorrower()
         {
             var builder = new DbContextOptionsBuilder<LibraryContext>();
             var db = new LibraryContext(builder.Options);
@@ -57,7 +57,7 @@ namespace LibraryManagementSystem.Data.Handlers
             {
                 return (from c in db.Books
                         .Include(m => m.Author)
-                        .Include(m => m.Borrower).Where(predicat)
+                        .Include(m => m.Customer)
                         select c)
                     .ToList();
             }
