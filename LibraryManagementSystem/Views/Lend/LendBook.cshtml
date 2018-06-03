@@ -9,13 +9,13 @@
 <div class="row orderForm">
 
     <form asp-controller="Lend" asp-action="LendBook" method="post" class="form-horizontal" role="form">
-        <h3 class="col-md-offset-2">Lend a book</h3>
+        <h3>Lend a book</h3>
         @Html.HiddenFor(m => Model.Book.BookId)
         <div class="form-group">
-            <label asp-for="Book.Borrower"></label>
+            <label asp-for="Book.Customer"></label>
             <div>
 
-                @Html.DropDownListFor(m => m.Book.BorrowerId,
+                @Html.DropDownListFor(m => m.Book.Customer.CustomerId,
                     new SelectList(Model.Customers.Select(x => new { Value = x.CustomerId, Text = x.Name }), "Value", "Text"),
                     "Select Customer",
                     htmlAttributes: new { @class = "form-control border-input" })

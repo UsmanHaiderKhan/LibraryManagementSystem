@@ -13,7 +13,7 @@
         <div class="form-group">
             <label asp-for="Book.Author" class="col-md-2 control-label"></label>
             <div>
-                @Html.DropDownListFor(m => m.Book.AuthorId,
+                @Html.DropDownListFor(m => m.Book.Author.AuthorId,
                     new SelectList(Model.Authors.Select(x => new { Value = x.AuthorId, Text = x.Name }), "Value", "Text"), "Select an author",
                     htmlAttributes: new { @class = "form-control border-input" })
                 <span asp-validation-for="Book.Author" class="text-danger"></span>
