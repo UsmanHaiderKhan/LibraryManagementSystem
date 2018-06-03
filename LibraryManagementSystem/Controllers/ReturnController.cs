@@ -13,7 +13,7 @@ namespace LibraryManagementSystem.Controllers
     {
         public IActionResult Index()
         {
-            var bookhandler = new BookHandler().GetBookwithAuthorBorrower(x => x.BorrowerId != 0);
+            var bookhandler = new BookHandler().GetBookwithAuthorBorrower();
             if (bookhandler == null || bookhandler.ToList().Count == 0)
             {
                 return View("Empty");
@@ -25,8 +25,8 @@ namespace LibraryManagementSystem.Controllers
         {
             var book = new BookHandler().GetBookById(bookId);
 
-            book.Borrower = null;
-            book.BorrowerId = 0;
+            book.Customer = null;
+            //book.Customer.CustomerId = 0;
 
             var builder = new DbContextOptionsBuilder<LibraryContext>();
             var db = new LibraryContext(builder.Options);

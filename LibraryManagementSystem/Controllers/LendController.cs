@@ -12,7 +12,7 @@ namespace LibraryManagementSystem.Controllers
         // GET
         public IActionResult Index()
         {
-            var availableBooks = new BookHandler().GetBookwithAuthorBorrower(c => c.BorrowerId == 0);
+            var availableBooks = new BookHandler().GetBookwithAuthorBorrower();
             if (availableBooks.Count == 0)
             {
                 return View("Empty");
@@ -40,8 +40,8 @@ namespace LibraryManagementSystem.Controllers
             var builder = new DbContextOptionsBuilder<LibraryContext>();
             var db = new LibraryContext(builder.Options);
             var book = new BookHandler().GetBookById(lendViewModel.Book.BookId);
-            var customer = new CustomerHandler().GetCustomerById(lendViewModel.Book.BorrowerId);
-            book.Borrower = customer;
+            var customer = new CustomerHandler().GetCustomerById(lendViewModel.Book.Customer.CustomerId);
+            book.Customer = customer;
             using (db)
             {
                 db.Entry(book).State = EntityState.Modified;
