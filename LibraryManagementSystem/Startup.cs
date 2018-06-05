@@ -40,7 +40,7 @@ namespace LibraryManagementSystem
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Customer}/{action=Index}/{id?}");
+                    template: "{controller=Home}/{action=Index}/{id?}");
             });
             //DbInitializer.Seed(app);
         }
