@@ -55,6 +55,10 @@ namespace LibraryManagementSystem.Controllers
         [HttpPost]
         public IActionResult AddCustomer(Customer customer)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(customer);
+            }
             var builder = new DbContextOptionsBuilder<LibraryContext>();
             var db = new LibraryContext(builder.Options);
             using (db)
@@ -73,6 +77,10 @@ namespace LibraryManagementSystem.Controllers
         [HttpPost]
         public IActionResult UpdateCustomer(Customer customer)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(customer);
+            }
             var builder = new DbContextOptionsBuilder<LibraryContext>();
             var db = new LibraryContext(builder.Options);
             using (db)

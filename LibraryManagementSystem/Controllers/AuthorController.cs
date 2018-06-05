@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using LibraryManagementSystem.Data;
 using LibraryManagementSystem.Data.Handlers;
 using LibraryManagementSystem.Data.Models;
+using LibraryManagementSystem.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -32,8 +34,11 @@ namespace LibraryManagementSystem.Controllers
             var db = new LibraryContext(builder.Options);
             if (author != null)
             {
-                db.Entry(author).State = EntityState.Modified;
-                db.SaveChanges();
+                if (ModelState.IsValid)
+                {
+                    db.Entry(author).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
             }
             else
             {
@@ -44,23 +49,30 @@ namespace LibraryManagementSystem.Controllers
         [HttpGet]
         public IActionResult AddAuthor()
         {
-            return View();
+            var viewModel = new AuthorViewModel
+            {
+                Referer = Request.Headers["Referer"].ToString()
+            };
+            return View(viewModel);
         }
         [HttpPost]
-        public IActionResult AddAuthor(Author author)
+        public IActionResult AddAuthor(AuthorViewModel authorViewModel)
         {
             var builder = new DbContextOptionsBuilder<LibraryContext>();
             var db = new LibraryContext(builder.Options);
             using (db)
             {
-                if (author != null)
+                if (authorViewModel != null)
                 {
                     if (ModelState.IsValid)
                     {
-                        db.Authors.Add(author);
+                        db.Authors.Add(authorViewModel.Author);
                         db.SaveChanges();
+                        if (!String.IsNullOrEmpty(authorViewModel.Referer))
+                        {
+                            return Redirect(authorViewModel.Referer);
+                        }
                     }
-
                 }
             }
             return RedirectToAction("Index");

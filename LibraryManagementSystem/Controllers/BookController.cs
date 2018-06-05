@@ -69,6 +69,11 @@ namespace LibraryManagementSystem.Controllers
         [HttpPost]
         public IActionResult AddBooks(BookViewModel bookViewModel)
         {
+            if (!ModelState.IsValid)
+            {
+                bookViewModel.Authors = new AuthorHandler().GetAllAuthors();
+                return View(bookViewModel);
+            }
             var builder = new DbContextOptionsBuilder<LibraryContext>();
             var db = new LibraryContext(builder.Options);
             using (db)
@@ -81,6 +86,7 @@ namespace LibraryManagementSystem.Controllers
         [HttpGet]
         public IActionResult UpdateBooks(int id)
         {
+
             var bookViewModel = new BookViewModel()
             {
                 Book = new BookHandler().GetBookById(id),
@@ -92,6 +98,11 @@ namespace LibraryManagementSystem.Controllers
         [HttpPost]
         public IActionResult UpdateBooks(BookViewModel bookViewModel)
         {
+            if (!ModelState.IsValid)
+            {
+                bookViewModel.Authors = new AuthorHandler().GetAllAuthors();
+                return View(bookViewModel);
+            }
             var builder = new DbContextOptionsBuilder<LibraryContext>();
             var db = new LibraryContext(builder.Options);
             using (db)

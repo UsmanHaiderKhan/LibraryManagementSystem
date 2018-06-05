@@ -1,4 +1,7 @@
-﻿using LibraryManagementSystem.Data;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using LibraryManagementSystem.Data;
 using LibraryManagementSystem.Data.Handlers;
 using LibraryManagementSystem.Data.Models;
 using LibraryManagementSystem.ViewModel;
@@ -12,15 +15,13 @@ namespace LibraryManagementSystem.Controllers
         // GET
         public IActionResult Index()
         {
-            var availableBooks = new BookHandler().GetBookwithAuthorBorrower();
+            var availableBooks = new BookHandler().GetBookwithAuthorBorrower(x => x.Customer.CustomerId == 0);
             if (availableBooks.Count == 0)
             {
                 return View("Empty");
             }
-            else
-            {
-                return View(availableBooks);
-            }
+
+            return View(availableBooks);
 
         }
         [HttpGet]
@@ -37,11 +38,12 @@ namespace LibraryManagementSystem.Controllers
         [HttpPost]
         public IActionResult LendBook(LendViewModel lendViewModel)
         {
-            var builder = new DbContextOptionsBuilder<LibraryContext>();
-            var db = new LibraryContext(builder.Options);
+
             var book = new BookHandler().GetBookById(lendViewModel.Book.BookId);
             var customer = new CustomerHandler().GetCustomerById(lendViewModel.Book.Customer.CustomerId);
             book.Customer = customer;
+            var builder = new DbContextOptionsBuilder<LibraryContext>();
+            var db = new LibraryContext(builder.Options);
             using (db)
             {
                 db.Entry(book).State = EntityState.Modified;

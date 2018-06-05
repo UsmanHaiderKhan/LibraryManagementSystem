@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using LibraryManagementSystem.Data;
 using LibraryManagementSystem.Data.Handlers;
+using LibraryManagementSystem.Data.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,7 +14,8 @@ namespace LibraryManagementSystem.Controllers
     {
         public IActionResult Index()
         {
-            var bookhandler = new BookHandler().GetBookwithAuthorBorrower();
+
+            var bookhandler = new BookHandler().GetBookwithAuthorBorrower(x => x.Customer.CustomerId != 0);
             if (bookhandler == null || bookhandler.ToList().Count == 0)
             {
                 return View("Empty");
@@ -26,7 +28,7 @@ namespace LibraryManagementSystem.Controllers
             var book = new BookHandler().GetBookById(bookId);
 
             book.Customer = null;
-            //book.Customer.CustomerId = 0;
+
 
             var builder = new DbContextOptionsBuilder<LibraryContext>();
             var db = new LibraryContext(builder.Options);
