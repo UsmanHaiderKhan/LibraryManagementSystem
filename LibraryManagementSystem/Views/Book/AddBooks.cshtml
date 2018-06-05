@@ -6,26 +6,20 @@
 }
 
 <div class="row orderForm">
-    <form asp-controller="Book" asp-action="AddBooks" method="post" class="form-horizontal" role="form">
+    <form asp-controller="Book" asp-action="AddBooks" method="post" role="form">
         <h3>Create new book</h3>
 
-
         <div class="form-group">
-            <label asp-for="Book.Author" class="col-md-2 control-label"></label>
+            <label asp-for="Book.Author"></label>
             <div>
                 @Html.DropDownListFor(m => m.Book.Author.AuthorId,
                     new SelectList(Model.Authors.Select(x => new { Value = x.AuthorId, Text = x.Name }), "Value", "Text"), "Select an author",
                     htmlAttributes: new { @class = "form-control border-input" })
                 <span asp-validation-for="Book.Author" class="text-danger"></span>
             </div>
-
-            <div>
-                <a class="btn btn-success" style="width:100%" asp-controller="Author" asp-action="AddAuthor">Create an author</a>
-            </div>
-
         </div>
         <div class="form-group">
-            <label asp-for="Book.Title" class="col-md-2 control-label"></label>
+            <label asp-for="Book.Title"></label>
             <div>
                 <input asp-for="Book.Title" class="form-control" placeholder="Enter customers name" />
                 <span asp-validation-for="Book.Title" class="text-danger"></span>
@@ -33,8 +27,10 @@
         </div>
         <div class="form-group">
             <div class="btn-group">
-                <input class="btn btn-default" type="submit" value="Return" asp-controller="Book" asp-action="List" />
-                <input class="btn btn-success" type="submit" value="Create" />
+                <input class="btn btn-default" type="submit" value="Return" asp-controller="Book" asp-action="Index" />
+                &nbsp;   <input class="btn btn-success" type="submit" value="Create" />
+                &nbsp;  <a class="btn btn-success" asp-controller="Author" asp-action="AddAuthor">Create New author</a>
+
             </div>
         </div>
     </form>

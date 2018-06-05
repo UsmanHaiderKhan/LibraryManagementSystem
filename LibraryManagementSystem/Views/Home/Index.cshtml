@@ -1,0 +1,60 @@
+﻿@model HomeViewModel
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+    int availableBooks = Model.BookCount - Model.LendBookCount;
+}
+<style>
+    .carousel-container {
+        width: 70vw; /* Set The Container Value As Required */
+        margin: auto;
+    }
+</style>
+
+<div class="row mt-2">
+    @Html.Partial("_Slider")
+</div>
+
+
+
+
+<div class="row mt-4 carousel-container">
+    <div class="col-md-6">
+        <div class="card mt-2">
+            <div class="card-header text-center deep-purple lighten-1 white-text">Total Customers</div>
+            <div class="card-body">
+                <h2>There are @Model.CustomerCount customers</h2>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card mt-2">
+            <div class="card-header text-center deep-purple lighten-1 white-text">Total Author's </div>
+            <div class="card-body">
+                <h2>There are @Model.AuthorCount authors</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card mt-4">
+            <div class="card-header text-center deep-purple lighten-1 white-text">No of Books in Library</div>
+            <div class="card-body">
+
+                <h2> There are @Model.BookCount books Avaialable in Library</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card mt-4">
+            <div class="card-header text-center deep-purple lighten-1 white-text">Total Available Book's</div>
+            <div class="card-body">
+
+                <h2>The NO of Books @availableBooks are Avaialable</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+

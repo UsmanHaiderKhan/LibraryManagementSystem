@@ -1,0 +1,38 @@
+﻿<link href="~/MDB Free/flickity.min.css" rel="stylesheet" />
+
+<style>
+    .carousel-container {
+        width: 70vw; /* Set The Container Value As Required */
+        margin: auto;
+    }
+
+    .carousel-cell img {
+        width: 70vw; /* Set same value as container if you want single image to fit container */
+    }
+</style>
+<div class="carousel-container">
+    <div class="main-carousel">
+        <div class="carousel-cell"> <img src="~/MDB Free/img/IM-Banners (1).jpg" /></div>
+        <div class="carousel-cell"> <img src="~/MDB Free/img/IM-Banners (2).jpg" /></div>
+        <div class="carousel-cell"> <img src="~/MDB Free/img/IM-Banners (3).jpg" /></div>
+        <div class="carousel-cell"> <img src="~/MDB Free/img/IM-Banners (5).jpg" /></div>
+        <div class="carousel-cell"> <img src="~/MDB Free/img/IM-Banners (6).jpg" /></div>
+    </div>
+</div>
+
+<script src="~/MDB Free/flickity.pkgd.min.js"></script>
+<script>
+    var elem = document.querySelector(".main-carousel");
+    var flkty = new Flickity(elem, {
+        autoPlay: 2500,
+        draggable: false,
+        cellAlign: 'center',
+        contain: true,
+        wrapAround: true,
+        prevNextButtons: true,
+        pageDots: true,
+        pauseAutoPlayOnHover: false,
+        initialIndex: 2, // Zero Based Index, Set First Slide
+        percentPosition: false    //-- TRUE Only If You want your slider width in percenatge
+    });
+</script>

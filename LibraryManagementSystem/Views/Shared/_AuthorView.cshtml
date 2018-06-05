@@ -1,21 +1,21 @@
 ﻿@model Author
 
-<div class="col-sm-4 col-lg-4 col-md-4">
+<div class="col-sm-6 col-lg-4 col-md-4 col-xl-4 mt-4">
     <div class="card">
         <div class="card-header deep-purple lighten-1 white-text"> <h3 class="text-center">@Model.Name</h3></div>
         <div class="card-text">
             <h2>&nbsp;  &nbsp;Book count:@Model.Books?.Count</h2>
-            <div class="btn-group mb-3">
+            <div class="btn-group mb-3 ml-3">
                 @if (Model.Books?.Count == 0)
                 {
-                    <span>&nbsp; &nbsp; &nbsp;</span><a class="btn btn-default btn-sm" asp-area="">View book list</a>
+                    <a class="btn btn-default btn-sm" asp-area="">View book list</a>
                 }
                 else
                 {
-                    <span>&nbsp; &nbsp; &nbsp;</span> <a class="btn btn-info btn-sm" asp-area="" asp-controller="Book" asp-action="Index" asp-route-authorId="@Model.AuthorId">View book list</a>
+                    <span>&nbsp;&nbsp;</span> <a class="btn btn-info btn-sm" asp-area="" asp-controller="Book" asp-action="Index" asp-route-authorId="@Model.AuthorId">View book list</a>
                 }
-                &nbsp;&nbsp; <a class="btn btn-info btn-sm" asp-area="" asp-controller="Author" asp-action="UpdateAuthor" asp-route-id="@Model.AuthorId">Edit</a>
-                &nbsp;&nbsp; <a class="btn btn-danger btn-sm" asp-area="" asp-controller="Author" asp-action="DeleteAuthor" asp-route-id="@Model.AuthorId">Delete</a>
+                &nbsp;&nbsp;&nbsp; <a class="btn btn-info btn-sm" asp-area="" asp-controller="Author" asp-action="UpdateAuthor" asp-route-id="@Model.AuthorId">Edit</a>
+                &nbsp;&nbsp;&nbsp; <a class="btn btn-danger btn-sm" asp-area="" asp-controller="Author" asp-action="DeleteAuthor" asp-route-id="@Model.AuthorId">Delete</a>
             </div>
         </div>
     </div>

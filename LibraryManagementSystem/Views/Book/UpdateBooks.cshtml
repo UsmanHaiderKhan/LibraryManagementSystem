@@ -7,29 +7,29 @@
 
 <div class="row orderForm">
 
-    <form asp-controller="Book" asp-action="UpdateBooks" method="post" class="form-horizontal" role="form">
-        <h3 class="col-md-offset-2">Update book</h3>
+    <form asp-controller="Book" asp-action="UpdateBooks" method="post" role="form">
+        <h3>Update book</h3>
         @Html.HiddenFor(m => Model.Book.BookId)
         <div class="form-group">
-            <label asp-for="Book.Author" class="col-md-2 control-label"></label>
+            <label asp-for="Book.Author"></label>
             <div class="col-md-6">
 
-                @Html.DropDownListFor(m => m.Book.AuthorId,
+                @Html.DropDownListFor(m => m.Book.Author.AuthorId,
                     new SelectList(Model.Authors.Select(x => new { Value = x.AuthorId, Text = x.Name}), "Value", "Text"),
                     htmlAttributes: new { @class = "form-control border-input" } )
             </div>
         </div>
         <div class="form-group">
-            <label asp-for="Book.Title" class="col-md-2 control-label"></label>
+            <label asp-for="Book.Title"></label>
             <div class="col-md-6">
                 <input asp-for="Book.Title" class="form-control" placeholder="Enter customers name" />
                 <span asp-validation-for="Book.Title" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group">
-            <div class="btn-group col-md-offset-2 col-md-6">
+            <div class="btn-group">
                 <input class="btn btn-default" type="submit" value="Return" asp-controller="Book" asp-action="List" />
-                <input class="btn btn-success" type="submit" value="Update" />
+                &nbsp;  <input class="btn btn-success" type="submit" value="Update" />
             </div>
         </div>
     </form>
