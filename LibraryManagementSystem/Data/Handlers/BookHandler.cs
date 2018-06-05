@@ -15,7 +15,9 @@ namespace LibraryManagementSystem.Data.Handlers
             var db = new LibraryContext(builder.Options);
             using (db)
             {
-                return (from c in db.Books.Include(m => m.Author).Include(m => m.Customer) where c.Customer.CustomerId == id select c).ToList();
+                return (from c in db.Books.Include(m => m.Author).Include(m => m.Customer)
+                        where c.Customer.CustomerId == id
+                        select c).ToList();
             }
         }
 
@@ -45,21 +47,45 @@ namespace LibraryManagementSystem.Data.Handlers
             var db = new LibraryContext(builder.Options);
             using (db)
             {
-                return (from c in db.Books.Include(m => m.Customer).Include(m => m.Author) where c.BookId == id select c).FirstOrDefault();
+                return (from c in db.Books.Include(m => m.Customer).Include(m => m.Author)
+                        where c.BookId == id
+                        select c).FirstOrDefault();
             }
         }
 
-        public List<Book> GetBookwithAuthorBorrower()
+        public List<Book> GetBookwithAuthorBorrower(Func<Book, bool> predicate)
         {
             var builder = new DbContextOptionsBuilder<LibraryContext>();
             var db = new LibraryContext(builder.Options);
             using (db)
             {
                 return (from c in db.Books
-                        .Include(m => m.Author)
-                        .Include(m => m.Customer)
+                            .Include(m => m.Author)
+                            .Include(m => m.Customer)
+                            .Where(predicate)
                         select c)
                     .ToList();
+            }
+        }
+        public int GetBookCount()
+        {
+            var builder = new DbContextOptionsBuilder<LibraryContext>();
+            var db = new LibraryContext(builder.Options);
+            using (db)
+            {
+                return (from o in db.Books select o).Count();
+            }
+        }
+        public int GetLendCount(Func<Book, bool> predicate)
+        {
+            var builder = new DbContextOptionsBuilder<LibraryContext>();
+            var db = new LibraryContext(builder.Options);
+            using (db)
+            {
+                return (from o in db.Books
+                    .Include(m => m.Customer)
+                    .Where(predicate)
+                        select o).Count();
             }
         }
     }

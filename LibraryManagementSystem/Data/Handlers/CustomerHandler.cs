@@ -28,6 +28,14 @@ namespace LibraryManagementSystem.Data.Handlers
                 return (from c in db.Customers where c.CustomerId == id select c).FirstOrDefault();
             }
         }
-
+        public int GetCustomerCount()
+        {
+            var builder = new DbContextOptionsBuilder<LibraryContext>();
+            var db = new LibraryContext(builder.Options);
+            using (db)
+            {
+                return (from o in db.Customers select o).Count();
+            }
+        }
     }
 }

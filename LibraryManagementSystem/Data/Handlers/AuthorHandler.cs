@@ -48,6 +48,16 @@ namespace LibraryManagementSystem.Data.Handlers
                 return (from c in db.Authors select c).ToList();
             }
         }
+        public int GetAuthorCount()
+        {
+            var builder = new DbContextOptionsBuilder<LibraryContext>();
+            var db = new LibraryContext(builder.Options);
+            using (db)
+            {
+                return (from o in db.Authors select o).Count();
+            }
+        }
+
 
     }
 }
