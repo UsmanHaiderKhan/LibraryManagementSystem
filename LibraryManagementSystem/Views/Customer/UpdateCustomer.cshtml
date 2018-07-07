@@ -7,19 +7,19 @@
 <div class="row orderForm">
 
     <form asp-controller="Customer" asp-action="UpdateCustomer" method="post" class="form-horizontal" role="form">
-        <h3 class="offset-md-2">Edit customer @Model.Name</h3>
+        <h3 class="offset-md-4">Edit customer @Model.Name</h3>
         @Html.HiddenFor(m => Model.CustomerId)
         <div class="form-group">
             <label asp-for="Name" class="col-md-2 control-label"></label>
-            <div class="col-md-6">
+            <div class="col-md-8">
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group">
-            <div class="btn-group offset-md-2 col-md-6">
+            <div class="btn-group">
                 <input class="btn btn-default" type="submit" value="Return" asp-controller="Customer" asp-action="List" />
-                <input class="btn btn-success" type="submit" value="Update" />
+                &nbsp; <input class="btn btn-success" type="submit" value="Update" />
             </div>
         </div>
     </form>
