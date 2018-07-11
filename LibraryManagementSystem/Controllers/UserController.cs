@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using LibraryManagementSystem.ViewModel;
+using Microsoft.AspNetCore.Mvc;
 
 namespace LibraryManagementSystem.Controllers
 {
@@ -15,7 +16,7 @@ namespace LibraryManagementSystem.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Login()
+        public IActionResult Login(LoginViewModel lvm)
         {
             return View();
         }
