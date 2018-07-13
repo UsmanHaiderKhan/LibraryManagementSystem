@@ -25,12 +25,12 @@
 
                 <div class="md-form">
                     <i class="fa fa-lock prefix"></i>
-                    <input type="password" id="form4" class="form-control">
-                    <label for="form4">Your password</label>
+                    @Html.TextBoxFor(m => m.Password, new { @class = "form-control" })
+                    @Html.LabelFor(m => m.Password)
                 </div>
 
                 <div class="text-center">
-                    <button class="btn btn-deep-purple">Login</button>
+                    <button class="btn btn-deep-purple" type="submit">Login</button>
                 </div>
 
             </div>
