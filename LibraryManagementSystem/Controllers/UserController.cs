@@ -1,4 +1,5 @@
-﻿using LibraryManagementSystem.ViewModel;
+﻿using LibraryManagementSystem.Data.Models;
+using LibraryManagementSystem.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LibraryManagementSystem.Controllers
@@ -20,10 +21,17 @@ namespace LibraryManagementSystem.Controllers
         {
             return View();
         }
-
+        [HttpGet]
         public IActionResult Signup()
         {
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult Signup(User user)
+        {
+            return View();
+
         }
     }
 }
